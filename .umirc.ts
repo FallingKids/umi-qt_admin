@@ -7,9 +7,15 @@ export default defineConfig({
   initialState: {},
   request: {},
   layout: {
-    title: '@umijs/max',
+    title: '巨丰量化',
   },
   routes: [
+    {
+      name: '登陆',
+      path: '/login',
+      component: './Login',
+      layout: false,
+    },
     {
       path: '/',
       redirect: '/home',
@@ -20,16 +26,22 @@ export default defineConfig({
       component: './Home',
     },
     {
-      name: '权限演示',
+      name: '行情数据',
+      path: 'stock-list',
+      component: './StockList',
+    },
+    {
+      path: '/stock-graph',
+      component: './StockGraph',
+    },
+    {
       path: '/access',
       component: './Access',
     },
     {
-        name: ' CRUD 示例',
-        path: '/table',
-        component: './Table',
+      path: '/table',
+      component: './Table',
     },
   ],
   npmClient: 'pnpm',
 });
-
