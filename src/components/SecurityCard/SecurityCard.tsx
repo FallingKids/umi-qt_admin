@@ -22,7 +22,7 @@ export interface Props {
   };
 }
 
-const StockCard: React.FC<Props> = (props) => {
+const SecurityCard: React.FC<Props> = (props) => {
   const [data, setData] = useState([]);
 
   const asyncFetch = () => {
@@ -76,4 +76,4 @@ const StockCard: React.FC<Props> = (props) => {
   );
 };
 
-export default StockCard;
+export default SecurityCard;

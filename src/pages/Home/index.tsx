@@ -1,13 +1,54 @@
-import SearchInput from '@/components/SearchInput';
+import StockSearchInput from '@/components/StockSearchInput';
 import { PageContainer } from '@ant-design/pro-components';
 import { Col, Row, Space } from 'antd';
 import SecurityCard from '@/components/SecurityCard';
 import * as StockInfoConstant from '@/constants/StockInfoConstant';
+import Title from 'antd/es/typography/Title';
+import StockListCard, {
+  StockListCardDataItem,
+} from '@/components/StockListCard/StockListCard';
+import { useState } from 'react';
 
 const HomePage: React.FC = () => {
+  const [stockListCardDataMap] = useState<{
+    [key: string]: StockListCardDataItem[];
+  }>({
+    increaseList: [
+      {
+        stockCode: '603190',
+        stockName: 'N亚通',
+        latestPrice: '41.890',
+        priceLimit: '+44.00%',
+      },
+      {
+        stockCode: '603190',
+        stockName: 'N亚通',
+        latestPrice: '41.890',
+        priceLimit: '+44.00%',
+      },
+      {
+        stockCode: '603190',
+        stockName: 'N亚通',
+        latestPrice: '41.890',
+        priceLimit: '+44.00%',
+      },
+      {
+        stockCode: '603190',
+        stockName: 'N亚通',
+        latestPrice: '41.890',
+        priceLimit: '+44.00%',
+      },
+      {
+        stockCode: '603190',
+        stockName: 'N亚通',
+        latestPrice: '41.890',
+        priceLimit: '+44.00%',
+      },
+    ],
+  });
   return (
     <div style={{ transform: 'translateY(20%)' }}>
-      <SearchInput />
+      <StockSearchInput />
       <PageContainer
         ghost
         tabList={[
@@ -31,9 +72,12 @@ const HomePage: React.FC = () => {
         <Space
           direction="vertical"
           size="large"
-          style={{ display: 'flex', transform: 'translateY(-10%)' }}
+          style={{ display: 'flex', transform: 'translateY(0%)' }}
         >
-          <Row gutter={{ xs: 60, sm: 120, md: 180, lg: 240 }}>
+          <Row
+            gutter={{ xs: 60, sm: 120, md: 180, lg: 240 }}
+            // style={{ marginLeft: '0%' }}
+          >
             <Col xs={24} sm={12} md={6} lg={6}>
               <SecurityCard
                 data={{
@@ -75,6 +119,45 @@ const HomePage: React.FC = () => {
                   timeSection: [],
                 }}
               />
+            </Col>
+          </Row>
+          <Title level={2} style={{ marginLeft: '5%' }}>
+            排行榜
+          </Title>
+          <Row
+            justify="start"
+            gutter={{ xs: 150, sm: 300, md: 400, lg: 500 }}
+            // style={{ marginLeft: '-10%' }}
+          >
+            <Col xs={36} sm={18} md={9} lg={9}>
+              <StockListCard
+                title="涨幅榜"
+                data={stockListCardDataMap['increaseList']}
+              ></StockListCard>
+            </Col>
+            <Col xs={36} sm={18} md={9} lg={9}>
+              <StockListCard
+                title="涨幅榜"
+                data={stockListCardDataMap['increaseList']}
+              ></StockListCard>
+            </Col>
+          </Row>
+          <Row
+            justify="start"
+            gutter={{ xs: 150, sm: 300, md: 400, lg: 500 }}
+            // style={{ marginLeft: '-10%' }}
+          >
+            <Col xs={36} sm={18} md={9} lg={9}>
+              <StockListCard
+                title="涨幅榜"
+                data={stockListCardDataMap['increaseList']}
+              ></StockListCard>
+            </Col>
+            <Col xs={36} sm={18} md={9} lg={9}>
+              <StockListCard
+                title="涨幅榜"
+                data={stockListCardDataMap['increaseList']}
+              ></StockListCard>
             </Col>
           </Row>
         </Space>

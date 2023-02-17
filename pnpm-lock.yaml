@@ -6183,7 +6183,7 @@ packages:
   /connect-timeout/1.0.0:
     resolution: {integrity: sha512-W2VzhWNVueme6StiPMn3/1uN3UCvWKQ3T5tm9YSkfju9DqCahHGL99cgEURuse/88bo3AgS8PZtQuL0bLpoLcw==}
     dependencies:
-      debug: 0.8.1
+      debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -12720,7 +12720,7 @@ packages:
   /send/0.2.0:
     resolution: {integrity: sha512-CR/kej5a8BChsMJwpmAtqOgdGI3nemoRaPcoXj/choHibvaOfkYcohcAbd9aEG8MhL9CfRH3KlUb+oHZsdNmTg==}
     dependencies:
-      debug: 0.8.1
+      debug: 4.3.4
       fresh: 0.2.2
       mime: 1.2.11
       range-parser: 1.0.0
