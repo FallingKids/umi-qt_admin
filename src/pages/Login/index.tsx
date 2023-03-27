@@ -1,3 +1,5 @@
+import { loginByPassword } from '@/api/user';
+import { RespCodeEnum } from '@/constants/api';
 import {
   AlipayOutlined,
   LockOutlined,
@@ -12,9 +14,12 @@ import {
   ProFormCheckbox,
   ProFormText,
 } from '@ant-design/pro-components';
-import { Divider, message, Space, Tabs } from 'antd';
+import { Button, Divider, message, Space, Tabs } from 'antd';
 import type { CSSProperties } from 'react';
 import { useState } from 'react';
+import * as BaseConstant from '../../constants/base';
+import { useNavigate } from 'react-router-dom';
+import { aes_encrypt } from '@/utils/aes';
 
 type LoginType = 'phone' | 'account';
 
@@ -26,7 +31,29 @@ const iconStyles: CSSProperties = {
 };
 
 const LoginPage: React.FC = () => {
+  const navigateTo = useNavigate();
   const [loginType, setLoginType] = useState<LoginType>('phone');
+  const login = async (values: any) => {
+    const { username, password } = values;
+    const encryptPassword = aes_encrypt(
+      password,
+      'jufeng6668987364',
+      'jufeng1234567890',
+    );
+    const {
+      code,
+      message: msg,
+      data,
+    } = await loginByPassword({ uid: username, password: encryptPassword });
+    if (code === RespCodeEnum.success) {
+      message.success('登陆成功');
+      localStorage.setItem(BaseConstant.LOGIN_TOKEN, data.token);
+      navigateTo('/home');
+    } else {
+      message.error(msg);
+    }
+  };
+
   return (
     <div
       style={{
@@ -36,33 +63,34 @@ const LoginPage: React.FC = () => {
       }}
     >
       <LoginFormPage
+        onFinish={login}
         backgroundImageUrl="https://res.cloudinary.com/https-fallingkids-github-io/image/upload/v1676466183/QT/umi-qt_admin/stock-1863880_xlmgcy.jpg"
         logo="https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg"
         title="巨丰量化"
         subTitle="基于人工智能计算的量化交易平台"
-        // activityConfig={{
-        //   style: {
-        //     boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.2)',
-        //     color: '#fff',
-        //     borderRadius: 8,
-        //     backgroundColor: '#1677FF',
-        //   },
-        //   title: '活动标题，可配置图片',
-        //   subTitle: '活动介绍说明文字',
-        //   action: (
-        //     <Button
-        //       size="large"
-        //       style={{
-        //         borderRadius: 20,
-        //         background: '#fff',
-        //         color: '#1677FF',
-        //         width: 120,
-        //       }}
-        //     >
-        //       去看看
-        //     </Button>
-        //   ),
-        // }}
+        activityConfig={{
+          style: {
+            boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.2)',
+            color: '#fff',
+            borderRadius: 8,
+            backgroundColor: '#1677FF',
+          },
+          title: '活动标题，可配置图片',
+          subTitle: '活动介绍说明文字',
+          action: (
+            <Button
+              size="large"
+              style={{
+                borderRadius: 20,
+                background: '#fff',
+                color: '#1677FF',
+                width: 120,
+              }}
+            >
+              去看看
+            </Button>
+          ),
+        }}
         actions={
           <div
             style={{
